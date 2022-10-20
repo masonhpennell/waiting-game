@@ -1,28 +1,4 @@
-#ifndef DBL_LIST_H
-#define DBL_LIST_H
-
-#include "ListNode.h"
-
-template <typename T>
-class DblList{
-    public:
-        DblList();
-        virtual ~DblList();
-        int size();
-        bool isEmpty();
-        void addFront(T data);
-        void addBack(T data);
-        void add(int pos, T data);
-        T get(int pos);
-        T removeFront();
-        T removeBack();
-        T remove(int pos);
-
-    private:
-        ListNode<T>* m_front;
-        ListNode<T>* m_back;
-        int m_size;
-};
+#include "DblList.h"
 
 template<typename T>
 DblList<T>::DblList(){
@@ -168,6 +144,3 @@ T DblList<T>::get(int pos){
     }
     return current->m_data;
 }
-
-
-#endif
