@@ -10,11 +10,15 @@ class Office{
     public:
         Office(int windows);
         virtual ~Office();
-
-        Window** m_windowArr;
+    private:
         int m_numWindows;
-    //Finish
+        int m_averageWait;
+        int m_longestWait;
+        int m_averageIdle;
+        int m_longestIdle;
+        Window** m_windowArr;
+        //finish
 
 };
 
-#endif OFFICE_H
+#endif
