@@ -25,26 +25,28 @@ void Office::addCustomer(Customer* cust, int time){
 
 ListQueue<Customer*> Office::tickTime(int time){
 
-    ListQueue<Customer*> temp = ListQueue<Customer*>(); //Using ListQueue as a way to return multiple items (if more than one customer finishes at windows at a time) like a ghetto ArrayList or something
+    ListQueue<Customer*> tempQueue = ListQueue<Customer*>(); //Using ListQueue as a way to return multiple items (if more than one customer finishes at windows at a time) like a ghetto ArrayList or something
     for(int i = 0; i < m_numWindows; i++){
-        if(m_windowArr[i]->m_servingCustomer == NULL && !m_customerQueue->isEmpty()){
-            m_windowArr[i]->m_servingCustomer = m_customerQueue->remove();
-            if(time - m_windowArr[i]->m_servingCustomer->m_enterTime == 10){
+        Customer* temp = m_windowArr[i]->tickTime();
+        if(temp != NULL){
+            tempQueue.add(temp);
+            if(time - temp->m_enterTime == 10){
                 m_tenWaited++;
             }
-        }else if(m_windowArr[i]->m_servingCustomer == NULL){
-            m_windowArr[i]->m_idleTime++;
+
+            if(time - temp->m_enterTime > m_longestWait){
+                m_longestWait = time - temp->m_enterTime;
+            }
+        }else{
             if(m_windowArr[i]->m_idleTime == 5){
                 m_fiveIdle++;
             }
-        }else{
-            m_windowArr[i]->m_servedTimeRemaining--;
-            if(m_windowArr[i]->m_servedTimeRemaining == 0){
-                temp.add(m_windowArr[i]->m_servingCustomer);
-                m_windowArr[i] = NULL;
+
+            if(m_windowArr[i]->m_idleTime > m_longestIdle){
+                m_longestIdle = m_windowArr[i]->m_idleTime;
             }
         }
 
     }
-    return temp;
+    return tempQueue;
 }

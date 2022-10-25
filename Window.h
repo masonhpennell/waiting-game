@@ -8,7 +8,7 @@ class Window{
     public:
         Window();
         virtual ~Window();
-        void tickTime();
+        Customer* tickTime();
 
         Customer* m_servingCustomer;
         int m_idleTime;

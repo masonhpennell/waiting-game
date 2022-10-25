@@ -26,7 +26,7 @@ class Office{
         int m_longestWait;
         int m_averageIdle;
         int m_longestIdle;
-        Window** m_windowArr
+        Window** m_windowArr;
     //Finish
 
 };

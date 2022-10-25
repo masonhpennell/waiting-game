@@ -1,6 +1,7 @@
 #ifndef ListQueue_H
 #define ListQueue_H
 #include <iostream>
+#include "DblList.h"
 
 template<typename T>
 class ListQueue{

@@ -12,10 +12,17 @@ Window::~Window(){
     }
 }
 
-void Window::tickTime(){
+Customer* Window::tickTime(){
     if(m_servingCustomer == NULL){
         m_idleTime++;
+        return NULL;
     }else{
         m_servedTimeRemaining--;
+        if(m_servedTimeRemaining == 0){
+            Customer* temp = m_servingCustomer;
+            m_servingCustomer = NULL;
+            return temp;
+        }
+        return NULL;
     }
 }
