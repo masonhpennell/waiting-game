@@ -12,19 +12,23 @@ class Office{
         Office(int windows);
         virtual ~Office();
 
-        Window** m_windowArr;
+        void addCustomer(Customer* cust, int time);
+
+        ListQueue<Customer*> tickTime(int time);
+    private:
         int m_numWindows;
 
         ListQueue<Customer*>* m_customerQueue;
 
-        void addCustomer(Customer* cust, int time);
-
-        ListQueue<Customer*> tickTime(int time);
-
         int m_tenWaited;
         int m_fiveIdle;
+        int m_averageWait;
+        int m_longestWait;
+        int m_averageIdle;
+        int m_longestIdle;
+        Window** m_windowArr
     //Finish
 
 };
 
-#endif OFFICE_H
+#endif

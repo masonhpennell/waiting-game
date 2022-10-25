@@ -1,10 +1,10 @@
 #include "Office.h"
 
 Office::Office(int windows){
-    Window m_windowArr[windows];
+    Window* m_windowArr[windows];
     m_numWindows = windows;
     for(int i = 0; i < m_numWindows; i++){
-        m_windowArr[i] = Window();
+        m_windowArr[i] = new Window();
     }
 
     ListQueue<Customer*>* m_customerQueue = new ListQueue<Customer*>;
