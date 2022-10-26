@@ -1,7 +1,7 @@
 #include "Office.h"
 
 Office::Office(int windows){
-    Window* m_windowArr[windows];
+    Window** m_windowArr = new Window*[windows];
     m_numWindows = windows;
     for(int i = 0; i < m_numWindows; i++){
         m_windowArr[i] = new Window();
@@ -38,12 +38,12 @@ ListQueue<Customer*> Office::tickTime(int time){
                 m_longestWait = time - temp->m_enterTime;
             }
         }else{
-            if(m_windowArr[i]->m_idleTime == 5){
+            if(m_windowArr[i]->getIdleTime() == 5){
                 m_fiveIdle++;
             }
 
-            if(m_windowArr[i]->m_idleTime > m_longestIdle){
-                m_longestIdle = m_windowArr[i]->m_idleTime;
+            if(m_windowArr[i]->getIdleTime() > m_longestIdle){
+                m_longestIdle = m_windowArr[i]->getIdleTime();
             }
         }
 

@@ -12,6 +12,14 @@ Window::~Window(){
     }
 }
 
+int Window::getIdleTime(){
+    return m_idleTime;
+}
+
+int Window::getServedTime(){
+    return m_servedTimeRemaining;
+}
+
 Customer* Window::tickTime(){
     if(m_servingCustomer == NULL){
         m_idleTime++;

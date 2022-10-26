@@ -9,7 +9,9 @@ class Window{
         Window();
         virtual ~Window();
         Customer* tickTime();
-
+        int getIdleTime();
+        int getServedTime();
+    private:
         Customer* m_servingCustomer;
         int m_idleTime;
         int m_servedTimeRemaining;

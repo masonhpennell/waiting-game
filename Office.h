@@ -11,15 +11,11 @@ class Office{
     public:
         Office(int windows);
         virtual ~Office();
-
         void addCustomer(Customer* cust, int time);
-
         ListQueue<Customer*> tickTime(int time);
     private:
         int m_numWindows;
-
         ListQueue<Customer*>* m_customerQueue;
-
         int m_tenWaited;
         int m_fiveIdle;
         int m_averageWait;
