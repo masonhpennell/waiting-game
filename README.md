@@ -1,6 +1,6 @@
 # Waiting Game
 Mason Pennell, Timothy Pieschala
-2370867
+2370867 (Tim's ID)
 pennell@chapman.edu, pieschala@chapman.edu
 CPSC 350-01
 Programming Assignment 4: The Waiting Game
@@ -9,7 +9,7 @@ Imagine that the student services center (SSC), which houses the registrar, cash
 
 CUSTOMER
 
-  
+  A customer has two different queues with times and offices to enter, as well as a time the student enters the first office. After each office, each queue has one value removed.
 
 OFFICE
 
@@ -17,11 +17,15 @@ OFFICE
 
 SERVICE CENTER
 
-  
+  The Service Center holds on to the students while the offices are all occupied.
 
 WINDOW
 
 
+
+FILE PROCESSOR
+
+  This program reads the input file and creates a Service Center to hold all customers.
 
 INSTRUCTIONS
 

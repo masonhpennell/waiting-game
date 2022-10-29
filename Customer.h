@@ -6,13 +6,17 @@ using namespace std;
 
 class Customer{
     public:
-        Customer();
+        Customer(int enterTime);
         virtual ~Customer();
         void addTask(int time, char office);
+        void finishTask();
+        int getTime();
+        int getOffice();
+        int getEnterTime();
+    private:
         ListQueue<int>* m_todoQueueTime;
         ListQueue<char>* m_todoQueueOffice;
         int m_enterTime;
-
 };
 
 

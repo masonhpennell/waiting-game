@@ -1,11 +1,15 @@
 #include "ServiceCenter.h"
 
-ServiceCenter::ServiceCenter(int rWindows, int cWindows, int fWindows){
+ServiceCenter::ServiceCenter(int* windows){
     m_time = 0;
-    registrar = new Office(rWindows);
-    cashier = new Office(cWindows);
-    financialAid = new Office(fWindows);
+    registrar = new Office(windows[0]);
+    cashier = new Office(windows[1]);
+    financialAid = new Office(windows[2]);
 }
 
 ServiceCenter::~ServiceCenter(){
+}
+
+void ServiceCenter::addCustomer(Customer* c){
+    customers->add(c);
 }

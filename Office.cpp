@@ -19,7 +19,7 @@ Office::~Office(){
 }
 
 void Office::addCustomer(Customer* cust, int time){
-    cust->m_enterTime = time;
+    cust->getEnterTime() = time;
     m_customerQueue->add(cust);
 }
 
@@ -30,12 +30,12 @@ ListQueue<Customer*> Office::tickTime(int time){
         Customer* temp = m_windowArr[i]->tickTime();
         if(temp != NULL){
             tempQueue.add(temp);
-            if(time - temp->m_enterTime == 10){
+            if(time - temp->getEnterTime() == 10){
                 m_tenWaited++;
             }
 
-            if(time - temp->m_enterTime > m_longestWait){
-                m_longestWait = time - temp->m_enterTime;
+            if(time - temp->getEnterTime() > m_longestWait){
+                m_longestWait = time - temp->getEnterTime();
             }
         }else{
             if(m_windowArr[i]->getIdleTime() == 5){
