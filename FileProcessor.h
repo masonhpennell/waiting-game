@@ -1,3 +1,12 @@
+/*
+Mason Pennell, Timothy Pieschala
+2370867 (Tim's ID)
+pennell@chapman.edu, pieschala@chapman.edu
+CPSC 350-01
+Programming Assignment 4: The Waiting Game
+
+This program reads the input file and creates a Service Center to hold all customers.
+*/
 #ifndef FILEPROCESSOR_H
 #define FILEPROCESSOR_H
 
@@ -12,7 +21,7 @@ class FileProcessor{
     public:
         FileProcessor();
         virtual ~FileProcessor();
-        void readFile(string input);
+        ServiceCenter* readFile(string input);
     private:
         int* m_windows;
         ServiceCenter* sc;

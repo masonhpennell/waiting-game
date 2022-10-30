@@ -1,5 +1,6 @@
 #include "Office.h"
 
+//constructor
 Office::Office(int windows){
     Window** m_windowArr = new Window*[windows];
     m_numWindows = windows;
@@ -12,6 +13,7 @@ Office::Office(int windows){
     int m_fiveIdle = 0;
 }
 
+//destructor
 Office::~Office(){
     for(int i = 0; i < m_numWindows; i++){
         delete m_windowArr[i];
@@ -49,4 +51,14 @@ ListQueue<Customer*> Office::tickTime(int time){
 
     }
     return tempQueue;
+}
+
+string Office::results(){
+    string s = "";
+    s += "Average student wait time: " + to_string(m_averageWait) + "\n";
+    s += "Longest student wait time: " + to_string(m_longestWait) + "\n";
+    s += "Students that waited over 10 minutes: " + to_string(m_tenWaited) + "\n";
+    s += "Average window idle time: " + to_string(m_averageIdle) + "\n";
+    s += "Longest window idle time: " + to_string(m_longestIdle) + "\n";
+    s += "Windows that were idle for over 5 minutes: " + to_string(m_fiveIdle) + "\n";
 }
