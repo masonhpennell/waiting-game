@@ -16,6 +16,7 @@ Office::~Office(){
     for(int i = 0; i < m_numWindows; i++){
         delete m_windowArr[i];
     }
+    delete[] m_windowArr;
 }
 
 void Office::addCustomer(Customer* cust, int time){
