@@ -31,7 +31,7 @@ int Customer::getTime(){
 }
 
 //returns the next office
-int Customer::getOffice(){
+char Customer::getOffice(){
     return m_todoQueueOffice->peek();
 }
 

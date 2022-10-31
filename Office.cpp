@@ -22,17 +22,17 @@ Office::~Office(){
 }
 
 void Office::addCustomer(Customer* cust, int time){
-    cust->getEnterTime() = time;
+    cust->m_enterTime = time;
     m_customerQueue->add(cust);
 }
 
-ListQueue<Customer*> Office::tickTime(int time){
+ListQueue<Customer*>* Office::tickTime(int time){
 
-    ListQueue<Customer*> tempQueue = ListQueue<Customer*>(); //Using ListQueue as a way to return multiple items (if more than one customer finishes at windows at a time) like a ghetto ArrayList or something
+    ListQueue<Customer*>* tempQueue = new ListQueue<Customer*>(); //Using ListQueue as a way to return multiple items (if more than one customer finishes at windows at a time) like a ghetto ArrayList or something
     for(int i = 0; i < m_numWindows; i++){
         Customer* temp = m_windowArr[i]->tickTime();
         if(temp != NULL){
-            tempQueue.add(temp);
+            tempQueue->add(temp);
             if(time - temp->getEnterTime() == 10){
                 m_tenWaited++;
             }
@@ -40,7 +40,8 @@ ListQueue<Customer*> Office::tickTime(int time){
             if(time - temp->getEnterTime() > m_longestWait){
                 m_longestWait = time - temp->getEnterTime();
             }
-        }else{
+            m_windowArr[i]->resetCustomer();
+        }else if(m_windowArr[i]->isIdle()){
             if(m_windowArr[i]->getIdleTime() == 5){
                 m_fiveIdle++;
             }
@@ -52,6 +53,19 @@ ListQueue<Customer*> Office::tickTime(int time){
 
     }
     return tempQueue;
+}
+
+bool Office::isEmpty(){
+    bool empty = true;
+    for(int i = 0; i < m_numWindows; i++){
+        if(m_windowArr[i] != NULL){
+            empty = false;
+        }
+    }
+    if(!m_customerQueue->isEmpty()){
+        empty = false;
+    }
+    return empty;
 }
 
 string Office::results(){

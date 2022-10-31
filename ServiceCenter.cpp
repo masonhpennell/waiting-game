@@ -21,13 +21,70 @@ void ServiceCenter::addCustomer(Customer* c){
 //moves the time by one for each office
 void ServiceCenter::tickTime(){
     m_time++;
-    registrar->tickTime(m_time);
-    cashier->tickTime(m_time);
-    financialAid->tickTime(m_time);
+    while(!customers->isEmpty() && customers->peek()->getEnterTime() == m_time){
+        Customer* cust = customers->remove();
+        if(cust->getOffice() == NULL){
+            delete cust;
+        }
+        if(cust->getOffice() == 'c'){
+            cashier->addCustomer(cust, m_time);
+        }else if(cust->getOffice() == 'f'){
+            financialAid->addCustomer(cust, m_time);
+        }else if(cust->getOffice() == 'r'){
+            registrar->addCustomer(cust, m_time);
+        }
+    }
+
+    ListQueue<Customer*>* cashQueue = cashier->tickTime(m_time);
+
+    while(!cashQueue->isEmpty()){
+        Customer* cust = cashQueue->remove();
+        if(cust->getOffice() == NULL){
+            delete cust;
+        }
+        if(cust->getOffice() == 'f'){
+            financialAid->addCustomer(cust, m_time);
+        }else if(cust->getOffice() == 'r'){
+            registrar->addCustomer(cust, m_time);
+        }
+    }
+    delete cashQueue;
+
+    ListQueue<Customer*>* finQueue = financialAid->tickTime(m_time);
+
+    while(!finQueue->isEmpty()){
+        Customer* cust = finQueue->remove();
+        if(cust->getOffice() == NULL){
+            delete cust;
+        }
+        if(cust->getOffice() == 'c'){
+            cashier->addCustomer(cust, m_time);
+        }else if(cust->getOffice() == 'r'){
+            registrar->addCustomer(cust, m_time);
+        }
+    }
+    delete finQueue;
+
+    ListQueue<Customer*>* regQueue = registrar->tickTime(m_time);
+
+    while(!regQueue->isEmpty()){
+        Customer* cust = regQueue->remove();
+        if(cust->getOffice() == NULL){
+            delete cust;
+        }
+        if(cust->getOffice() == 'c'){
+            cashier->addCustomer(cust, m_time);
+        }else if(cust->getOffice() == 'f'){
+            financialAid->addCustomer(cust, m_time);
+        }
+    }
+    delete regQueue;
 }
 
-//retursn true if all students have been serviced
+//returns true if all students have been serviced
 bool ServiceCenter::finished(){
+    return (registrar->isEmpty() && cashier->isEmpty() && financialAid->isEmpty());
+
     //check if all offices and windows are empty
 }
 

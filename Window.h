@@ -20,6 +20,9 @@ class Window{
         Customer* tickTime();
         int getIdleTime();
         int getServedTime();
+        void addCustomer(Customer* c);
+        bool isIdle();
+        void resetCustomer();
     private:
         Customer* m_servingCustomer;
         int m_idleTime;

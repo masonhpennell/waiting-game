@@ -22,12 +22,13 @@ class Customer{
         void addTask(int time, char office);
         void finishTask();
         int getTime();
-        int getOffice();
+        char getOffice();
         int getEnterTime();
+        int m_enterTime;
     private:
         ListQueue<int>* m_todoQueueTime;
         ListQueue<char>* m_todoQueueOffice;
-        int m_enterTime;
+        
 };
 
 #endif
