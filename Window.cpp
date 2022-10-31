@@ -1,15 +1,25 @@
 #include "Window.h"
 
+//constructor
 Window::Window(){
     m_servingCustomer = NULL;
     m_idleTime = 0;
     m_servedTimeRemaining = 0;
 }
 
+//destructor
 Window::~Window(){
     if(m_servingCustomer != NULL){
         delete m_servingCustomer;
     }
+}
+
+int Window::getIdleTime(){
+    return m_idleTime;
+}
+
+int Window::getServedTime(){
+    return m_servedTimeRemaining;
 }
 
 Customer* Window::tickTime(){

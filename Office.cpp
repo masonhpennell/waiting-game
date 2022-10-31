@@ -1,7 +1,8 @@
 #include "Office.h"
 
+//constructor
 Office::Office(int windows){
-    Window* m_windowArr[windows];
+    Window** m_windowArr = new Window*[windows];
     m_numWindows = windows;
     for(int i = 0; i < m_numWindows; i++){
         m_windowArr[i] = new Window();
@@ -12,6 +13,7 @@ Office::Office(int windows){
     int m_fiveIdle = 0;
 }
 
+//destructor
 Office::~Office(){
     for(int i = 0; i < m_numWindows; i++){
         delete m_windowArr[i];
@@ -20,7 +22,7 @@ Office::~Office(){
 }
 
 void Office::addCustomer(Customer* cust, int time){
-    cust->m_enterTime = time;
+    cust->getEnterTime() = time;
     m_customerQueue->add(cust);
 }
 
@@ -31,23 +33,33 @@ ListQueue<Customer*> Office::tickTime(int time){
         Customer* temp = m_windowArr[i]->tickTime();
         if(temp != NULL){
             tempQueue.add(temp);
-            if(time - temp->m_enterTime == 10){
+            if(time - temp->getEnterTime() == 10){
                 m_tenWaited++;
             }
 
-            if(time - temp->m_enterTime > m_longestWait){
-                m_longestWait = time - temp->m_enterTime;
+            if(time - temp->getEnterTime() > m_longestWait){
+                m_longestWait = time - temp->getEnterTime();
             }
         }else{
-            if(m_windowArr[i]->m_idleTime == 5){
+            if(m_windowArr[i]->getIdleTime() == 5){
                 m_fiveIdle++;
             }
 
-            if(m_windowArr[i]->m_idleTime > m_longestIdle){
-                m_longestIdle = m_windowArr[i]->m_idleTime;
+            if(m_windowArr[i]->getIdleTime() > m_longestIdle){
+                m_longestIdle = m_windowArr[i]->getIdleTime();
             }
         }
 
     }
     return tempQueue;
+}
+
+string Office::results(){
+    string s = "";
+    s += "Average student wait time: " + to_string(m_averageWait) + "\n";
+    s += "Longest student wait time: " + to_string(m_longestWait) + "\n";
+    s += "Students that waited over 10 minutes: " + to_string(m_tenWaited) + "\n";
+    s += "Average window idle time: " + to_string(m_averageIdle) + "\n";
+    s += "Longest window idle time: " + to_string(m_longestIdle) + "\n";
+    s += "Windows that were idle for over 5 minutes: " + to_string(m_fiveIdle) + "\n";
 }
