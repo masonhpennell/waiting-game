@@ -33,6 +33,7 @@ ListQueue<Customer*>* Office::tickTime(int time){
         cout << "   window tick" << endl;
         cout << "   customer @ " << m_windowArr[i] << endl;
         if(m_windowArr[i]->isIdle()){
+            cout << "window idle" << endl;
             if(!m_customerQueue->isEmpty()){
                 m_windowArr[i]->addCustomer(m_customerQueue->remove());
                 cout << "      moving customer to window in office" << endl;
