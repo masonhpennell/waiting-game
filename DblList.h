@@ -1,3 +1,12 @@
+/*
+Mason Pennell, Timothy Pieschala
+2370867 2391088
+pennell@chapman.edu, pieschala@chapman.edu
+CPSC 350-01
+Programming Assignment 4: The Waiting Game
+
+A doubly linked list dynamically stores a number of nodes which each have a next and prev pointer
+*/
 #ifndef DBL_LIST_H
 #define DBL_LIST_H
 
@@ -24,6 +33,7 @@ class DblList{
         int m_size;
 };
 
+// constructor
 template<typename T>
 DblList<T>::DblList(){
     m_front = NULL;
@@ -31,6 +41,7 @@ DblList<T>::DblList(){
     m_size = 0;
 }
 
+// destructor
 template<typename T>
 DblList<T>::~DblList(){
     while(!isEmpty()){
@@ -49,6 +60,7 @@ bool DblList<T>::isEmpty(){
     return (m_size == 0);
 }
 
+// adds T data to the front of the list
 template<typename T>
 void DblList<T>::addFront(T data){
     ListNode<T>* newNode = new ListNode<T>(data);
@@ -62,6 +74,7 @@ void DblList<T>::addFront(T data){
     ++m_size;
 }
 
+// adds T data to the back of the list
 template<typename T>
 void DblList<T>::addBack(T data){
     ListNode<T>* newNode = new ListNode<T>(data);
@@ -75,6 +88,7 @@ void DblList<T>::addBack(T data){
     ++m_size;
 }
 
+// adds T data to the point at pos
 template<typename T>
 void DblList<T>::add(int pos, T data){
     if(isEmpty() || pos == 0){
@@ -84,6 +98,7 @@ void DblList<T>::add(int pos, T data){
     }else{
         ListNode<T>* current = m_front;
         int cPos = 0;
+        // moves from the beginning of the list to element [pos]
         while(cPos != pos){
             current = current->m_next;
             ++cPos;
@@ -97,6 +112,7 @@ void DblList<T>::add(int pos, T data){
     }
 }
 
+//removes the element from the front of the list
 template<typename T>
 T DblList<T>::removeFront(){
     //make sure not empty
@@ -115,6 +131,7 @@ T DblList<T>::removeFront(){
     return data;
 }
 
+//removes the element from the back of the list
 template<typename T>
 T DblList<T>::removeBack(){
     //make sure not empty
@@ -133,6 +150,7 @@ T DblList<T>::removeBack(){
      return data;
 }
 
+//removes the [pos]th element from the list
 template<typename T>
 T DblList<T>::remove(int pos){
     //make sure not empty
@@ -157,6 +175,7 @@ T DblList<T>::remove(int pos){
     return data;
 }
 
+//returns the [pos]th element
 template<typename T>
 T DblList<T>::get(int pos){
     //is pos in range, etc.

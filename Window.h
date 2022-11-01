@@ -5,7 +5,8 @@ pennell@chapman.edu, pieschala@chapman.edu
 CPSC 350-01
 Programming Assignment 4: The Waiting Game
 
-insert office description
+A window serves a customer and returns it when he/she is finished.
+It also keeps track of how long it's gone without serving a customer or how long it has left with a customer.
 */
 #ifndef WINDOW_H
 #define WINDOW_H

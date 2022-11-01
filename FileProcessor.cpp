@@ -10,6 +10,8 @@ FileProcessor::~FileProcessor(){
     
 }
 
+// Reads the input file and returns a filled student center
+// string input: file name
 ServiceCenter* FileProcessor::readFile(string input){
     ifstream inFile(input);
     int i = 0;
@@ -42,27 +44,31 @@ ServiceCenter* FileProcessor::readFile(string input){
                 cout << line << endl;
             }
             else{
+                // creates a new customer 
                 Customer* c = new Customer(clockTick);
                 int times[3];
                 char offices[3];
                 int j = 0;
                 // reads line for times and offices until end is reached
                 while ((pos = line.find(" ")) != string::npos) {
-                    // adds integers to times array
+                    // adds the first three integers to times array
                     if (j < 3){
                         times[j] = stoi(line.substr(0, pos));
                         cout << times[j] << endl;
                         line.erase(0, pos + 1);
                     }
-                    //adds chars to offices array
+                    // adds the next two chars to offices array
                     else{
                         string s = line.substr(0, pos);
                         offices[j-3] = s.at(0);
-                        cout << offices[j-3] << endl;
                         line.erase(0, pos + 1);
                     }
                     j++;
                 }
+                // adds the last char to the offices
+                string s = line.substr(0, 1);
+                offices[2] = s.at(0);
+                // each element of the times and the offices array correlate with each other
                 for (int a = 0; a < 3; a++)
                     c->addTask(times[a], offices[a]);
                 // creates new service center if one doesn't exist

@@ -13,7 +13,9 @@ Customer::~Customer(){
     delete m_todoQueueTime;
 }
 
-//adds a new task to a customer with a time and office to go to
+// adds a new task to a customer with a time and office to go to
+// int time: the time at which the student visits the office
+// char office: the office the student visits
 void Customer::addTask(int time, char office){
     m_todoQueueTime->add(time);
     m_todoQueueOffice->add(office);
@@ -27,11 +29,15 @@ void Customer::finishTask(){
 
 //returns the next time
 int Customer::getTime(){
+    if (m_todoQueueTime->isEmpty())
+        return NULL;
     return m_todoQueueTime->peek();
 }
 
 //returns the next office
 char Customer::getOffice(){
+    if (m_todoQueueOffice->isEmpty())
+        return NULL;
     return m_todoQueueOffice->peek();
 }
 

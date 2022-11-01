@@ -5,7 +5,12 @@ pennell@chapman.edu, pieschala@chapman.edu
 CPSC 350-01
 Programming Assignment 4: The Waiting Game
 
-insert office description
+This office contains a number of windows, each able to serve a customer
+The customer is served for however long they need the window for. When they're finished, they move to the next office
+If a window is still in service, we wait.
+When students arrive at the same time and visit the same office first, the first student listed is the first to get into line.
+If 2 students finish at different offices at the same time and head to the same office next,
+they enter the line based on alphabetical order of the office they are coming from
 */
 #ifndef OFFICE_H
 #define OFFICE_H
@@ -34,8 +39,6 @@ class Office{
         int m_averageIdle;
         int m_longestIdle;
         Window** m_windowArr;
-    //Finish
-
 };
 
 #endif
