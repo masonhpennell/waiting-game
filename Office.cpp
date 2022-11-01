@@ -9,8 +9,12 @@ Office::Office(int windows){
     }
 
     m_customerQueue = new ListQueue<Customer*>;
-    int m_overtenWaited = 0;
-    int m_fiveIdle = 0;
+    m_tenWaited = 0;
+    m_fiveIdle = 0;
+    m_averageWait = 0;
+    m_longestWait = 0;
+    m_averageIdle = 0;
+    m_longestIdle = 0;
 }
 
 //destructor
@@ -92,7 +96,7 @@ string Office::results(){
     s += "Average student wait time: " + to_string(m_averageWait) + "\n";
     s += "Longest student wait time: " + to_string(m_longestWait) + "\n";
     s += "Students that waited over 10 minutes: " + to_string(m_tenWaited) + "\n";
-    s += "Average window idle time: " + to_string(m_averageIdle) + "\n";
+    s += "Average window idle time: " + to_string(m_averageIdle/m_numWindows) + "\n";
     s += "Longest window idle time: " + to_string(m_longestIdle) + "\n";
     s += "Windows that were idle for over 5 minutes: " + to_string(m_fiveIdle) + "\n";
 }
