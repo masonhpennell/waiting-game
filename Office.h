@@ -28,7 +28,7 @@ class Office{
         virtual ~Office();
         void addCustomer(Customer* cust, int time);
         ListQueue<Customer*>* tickTime(int time);
-        string results();
+        void results();
         bool isEmpty();
     private:
         int m_numWindows;
