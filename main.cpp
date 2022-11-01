@@ -8,7 +8,6 @@ int main(int argc, char** argv){
     FileProcessor* fp = new FileProcessor();
     ServiceCenter* center = fp->readFile(argv[1]);
     while (!center->finished()){
-        cout << "ticking" << endl;
         center->tickTime();
     }
     center->results();

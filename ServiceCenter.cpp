@@ -21,11 +21,9 @@ void ServiceCenter::addCustomer(Customer* c){
 //moves the time by one for each office
 void ServiceCenter::tickTime(){
     m_time++;
+    cout << "tick #" << m_time << endl;
     while(!customers->isEmpty() && customers->peek()->getEnterTime() == m_time){
         Customer* cust = customers->remove();
-        if(cust->getOffice() == NULL){
-            delete cust;
-        }
         if(cust->getOffice() == 'c'){
             cashier->addCustomer(cust, m_time);
         }else if(cust->getOffice() == 'f'){
@@ -83,7 +81,7 @@ void ServiceCenter::tickTime(){
 
 //returns true if all students have been serviced
 bool ServiceCenter::finished(){
-    return (registrar->isEmpty() && cashier->isEmpty() && financialAid->isEmpty()) && m_time != 0;
+    return m_time != 0 && (registrar->isEmpty() && cashier->isEmpty() && financialAid->isEmpty()) || m_time == 25;
 
     //check if all offices and windows are empty
 }
