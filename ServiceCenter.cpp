@@ -26,7 +26,6 @@ void ServiceCenter::addCustomer(Customer* c){
 void ServiceCenter::tickTime(){
     m_time++;
     // continues checking the customers queue until it empties or the next student's enter time doesn't match the current time
-    cout << "tick #" << m_time << endl;
 
     while(!customers->isEmpty() && customers->peek()->m_startTime == m_time){
         Customer* cust = customers->remove();
