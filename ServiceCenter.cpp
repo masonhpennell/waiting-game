@@ -88,7 +88,7 @@ void ServiceCenter::tickTime(){
 
 //returns true if all students have been serviced
 bool ServiceCenter::finished(){
-    return m_time != 0 && (registrar->isEmpty() && cashier->isEmpty() && financialAid->isEmpty()) || m_time == 25;
+    return (registrar->isEmpty() && cashier->isEmpty() && financialAid->isEmpty());
 
     //check if all offices and windows are empty
 }

@@ -40,30 +40,31 @@ ListQueue<Customer*>* Office::tickTime(int time){
                 m_windowArr[i]->addCustomer(m_customerQueue->remove());
                 cout << "           moving customer to window in office" << endl;
             }
-        }
-        Customer* temp = m_windowArr[i]->tickTime();
-        // if no customer is returned, the window is still busy so nothing happens
-        // if a customer IS returned, the next person in line is added
-        if(temp != NULL){
-            tempQueue->add(temp);
-            // increments m_tenWaited if the student waited more than 10 minutes to get a window
-            if(time - temp->getEnterTime() == 10){
-                m_tenWaited++;
-            }
-            // changes m_longestWait to the longest time a student waited
-            if(time - temp->getEnterTime() > m_longestWait){
-                m_longestWait = time - temp->getEnterTime();
-            }
-            //resets the customer 
-            //m_windowArr[i]->resetCustomer();
-        }else if(m_windowArr[i]->isIdle()){
-            // increments m_fiveIdle if the window was idle for over 5 minutes
-            if(m_windowArr[i]->getIdleTime() == 5){
-                m_fiveIdle++;
-            }
-            // the longest time a window had no customer
-            if(m_windowArr[i]->getIdleTime() > m_longestIdle){
-                m_longestIdle = m_windowArr[i]->getIdleTime();
+        }else{
+            Customer* temp = m_windowArr[i]->tickTime();
+            // if no customer is returned, the window is still busy so nothing happens
+            // if a customer IS returned, the next person in line is added
+            if(temp != NULL){
+                tempQueue->add(temp);
+                // increments m_tenWaited if the student waited more than 10 minutes to get a window
+                if(time - temp->getEnterTime() == 10){
+                    m_tenWaited++;
+                }
+                // changes m_longestWait to the longest time a student waited
+                if(time - temp->getEnterTime() > m_longestWait){
+                    m_longestWait = time - temp->getEnterTime();
+                }
+                //resets the customer 
+                //m_windowArr[i]->resetCustomer();
+            }else if(m_windowArr[i]->isIdle()){
+                // increments m_fiveIdle if the window was idle for over 5 minutes
+                if(m_windowArr[i]->getIdleTime() == 5){
+                    m_fiveIdle++;
+                }
+                // the longest time a window had no customer
+                if(m_windowArr[i]->getIdleTime() > m_longestIdle){
+                    m_longestIdle = m_windowArr[i]->getIdleTime();
+                }
             }
         }
 
