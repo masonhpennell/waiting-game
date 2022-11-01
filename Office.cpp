@@ -32,17 +32,12 @@ void Office::addCustomer(Customer* cust, int time){
 
 //moves the time forward by one
 ListQueue<Customer*>* Office::tickTime(int time){
-    cout << "office tick" << endl;
     ListQueue<Customer*>* tempQueue = new ListQueue<Customer*>(); //Using ListQueue as a way to return multiple items (if more than one customer finishes at windows at a time) like a ghetto ArrayList or something
     for(int i = 0; i < m_numWindows; i++){
         // temp: the customer currently at window [i]
-        cout << "   window tick" << endl;
-        cout << "   customer @ " << m_windowArr[i] << endl;
         if(m_windowArr[i]->isIdle()){
-            cout << "      window idle " << !(m_customerQueue->isEmpty()) << endl;
             if(!(m_customerQueue->isEmpty())){
                 m_windowArr[i]->addCustomer(m_customerQueue->remove());
-                cout << "           moving customer to window in office" << endl;
             }
         }else{
             Customer* temp = m_windowArr[i]->tickTime();
