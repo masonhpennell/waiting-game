@@ -1,10 +1,11 @@
 #include "Customer.h"
 
 //customer
-Customer::Customer(int enterTime){
+Customer::Customer(int startTime){
     m_todoQueueTime = new ListQueue<int>();
     m_todoQueueOffice = new ListQueue<char>();
-    m_enterTime = enterTime;
+    m_enterTime = 0;
+    m_startTime = startTime;
 }
 
 //destructor

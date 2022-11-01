@@ -23,14 +23,17 @@ void ServiceCenter::tickTime(){
     m_time++;
     // continues checking the customers queue until it empties or the next student's enter time doesn't match the current time
     cout << "tick #" << m_time << endl;
-    while(!customers->isEmpty() && customers->peek()->getEnterTime() == m_time){
+
+    while(!customers->isEmpty() && customers->peek()->m_startTime == m_time){
         Customer* cust = customers->remove();
-        if(cust->getOffice() == 'c'){
+        cout << cust->getOffice() << endl;
+        if(cust->getOffice() == 'C'){
             cashier->addCustomer(cust, m_time);
-        }else if(cust->getOffice() == 'f'){
+        }else if(cust->getOffice() == 'F'){
             financialAid->addCustomer(cust, m_time);
-        }else if(cust->getOffice() == 'r'){
+        }else if(cust->getOffice() == 'R'){
             registrar->addCustomer(cust, m_time);
+            cout << "added to registrar" << endl;
         }
     }
     /*
@@ -44,9 +47,9 @@ void ServiceCenter::tickTime(){
         if(cust->getOffice() == NULL){
             delete cust;
         }
-        if(cust->getOffice() == 'f'){
+        if(cust->getOffice() == 'F'){
             financialAid->addCustomer(cust, m_time);
-        }else if(cust->getOffice() == 'r'){
+        }else if(cust->getOffice() == 'R'){
             registrar->addCustomer(cust, m_time);
         }
     }
@@ -59,9 +62,9 @@ void ServiceCenter::tickTime(){
         if(cust->getOffice() == NULL){
             delete cust;
         }
-        if(cust->getOffice() == 'c'){
+        if(cust->getOffice() == 'C'){
             cashier->addCustomer(cust, m_time);
-        }else if(cust->getOffice() == 'r'){
+        }else if(cust->getOffice() == 'R'){
             registrar->addCustomer(cust, m_time);
         }
     }
@@ -74,9 +77,9 @@ void ServiceCenter::tickTime(){
         if(cust->getOffice() == NULL){
             delete cust;
         }
-        if(cust->getOffice() == 'c'){
+        if(cust->getOffice() == 'C'){
             cashier->addCustomer(cust, m_time);
-        }else if(cust->getOffice() == 'f'){
+        }else if(cust->getOffice() == 'F'){
             financialAid->addCustomer(cust, m_time);
         }
     }

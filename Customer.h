@@ -17,7 +17,7 @@ using namespace std;
 
 class Customer{
     public:
-        Customer(int enterTime);
+        Customer(int startTime);
         virtual ~Customer();
         void addTask(int time, char office);
         void finishTask();
@@ -25,6 +25,7 @@ class Customer{
         char getOffice();
         int getEnterTime();
         int m_enterTime;
+        int m_startTime;
     private:
         ListQueue<int>* m_todoQueueTime;
         ListQueue<char>* m_todoQueueOffice;
