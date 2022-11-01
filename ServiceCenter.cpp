@@ -18,9 +18,10 @@ void ServiceCenter::addCustomer(Customer* c){
     customers->add(c);
 }
 
-//moves the time by one for each office
+//moves the time forward by one for each office
 void ServiceCenter::tickTime(){
     m_time++;
+    // continues checking the customers queue until it empties or the next student's enter time doesn't match the current time
     while(!customers->isEmpty() && customers->peek()->getEnterTime() == m_time){
         Customer* cust = customers->remove();
         if(cust->getOffice() == NULL){
@@ -34,7 +35,10 @@ void ServiceCenter::tickTime(){
             registrar->addCustomer(cust, m_time);
         }
     }
-
+    /*
+    Each office generates a queue of students that finished their job
+    Afterwards, they are moved to the next office according to their queues
+    */
     ListQueue<Customer*>* cashQueue = cashier->tickTime(m_time);
 
     while(!cashQueue->isEmpty()){

@@ -1,3 +1,14 @@
+/*
+Mason Pennell, Timothy Pieschala
+2370867 (Tim's ID)
+pennell@chapman.edu, pieschala@chapman.edu
+CPSC 350-01
+Programming Assignment 4: The Waiting Game
+
+The Service Center holds on to the customers who are waiting for their time.
+Every time the clock ticks, the students are moved to their offices.
+The program is constantly checking if all offices are finished.
+*/
 #ifndef SERVICECENTER_H
 #define SERVICECENTER_H
 

@@ -10,6 +10,8 @@ FileProcessor::~FileProcessor(){
     
 }
 
+// Reads the input file and returns a filled student center
+// string input: file name
 ServiceCenter* FileProcessor::readFile(string input){
     ifstream inFile(input);
     int i = 0;
@@ -19,6 +21,7 @@ ServiceCenter* FileProcessor::readFile(string input){
     int studentLine = 4;
     char pos;
     string line;
+    ServiceCenter* sc = NULL;
     // parses each line of the input file
     while (getline(inFile, line)) {
         if(!line.empty()){
@@ -34,6 +37,7 @@ ServiceCenter* FileProcessor::readFile(string input){
                 // checks if the current line is the number of students
                 else if (i == studentLine){
                     numStudents = stod(line);
+                    // adds the number of students to account for the next line(s)
                     tickLine += numStudents + 1;
                     studentLine += numStudents + 1;
                 }
@@ -41,27 +45,30 @@ ServiceCenter* FileProcessor::readFile(string input){
                 cout << line << endl;
             }
             else{
+                // creates a new customer 
                 Customer* c = new Customer(clockTick);
                 int times[3];
                 char offices[3];
                 int j = 0;
                 // reads line for times and offices until end is reached
                 while ((pos = line.find(" ")) != string::npos) {
-                    // adds integers to times array
+                    // adds the first three integers to times array
                     if (j < 3){
-                        times[j] = stod(line.substr(0, pos));
-                        cout << times[j] << endl;
+                        times[j] = stoi(line.substr(0, pos));
                         line.erase(0, pos + 1);
                     }
-                    //adds chars to offices array
+                    // adds the next two chars to offices array
                     else{
                         string s = line.substr(0, pos);
                         offices[j-3] = s.at(0);
-                        cout << offices[j-3] << endl;
                         line.erase(0, pos + 1);
                     }
                     j++;
                 }
+                // adds the last char to the offices
+                string s = line.substr(0, 1);
+                offices[2] = s.at(0);
+                // each element of the times and the offices array correlate with each other
                 for (int a = 0; a < 3; a++)
                     c->addTask(times[a], offices[a]);
                 // creates new service center if one doesn't exist

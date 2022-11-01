@@ -13,14 +13,15 @@ CUSTOMER
 
 OFFICE
 
-
+  This office contains a number of windows, each able to serve a customer. The customer is served for however long they need the window for. When they're finished, they move to the next office. If a window is still in service, we wait. When students arrive at the same time and visit the same office first, the first student listed is the first to get into line. If 2 students finish at different offices at the same time and head to the same office next, they enter the line based on alphabetical order of the office they are coming from.
 
 SERVICE CENTER
 
-  The Service Center holds on to the students while the offices are all occupied.
+  The Service Center holds on to the customers who are waiting for their time. Every time the clock ticks, the students are moved to their offices. The program is constantly checking if all offices are finished.
 
 WINDOW
 
+  A window serves a customer and returns it when he/she is finished. It also keeps track of how long it's gone without serving a customer or how long it has left with a customer.
 
 
 FILE PROCESSOR

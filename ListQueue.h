@@ -1,3 +1,12 @@
+/*
+Mason Pennell, Timothy Pieschala
+2370867 2391088
+pennell@chapman.edu, pieschala@chapman.edu
+CPSC 350-01
+Programming Assignment 4: The Waiting Game
+
+This type of queue has a FIFO data structure and uses the linked list methods
+*/
 #ifndef ListQueue_H
 #define ListQueue_H
 #include <iostream>
