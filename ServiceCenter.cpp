@@ -13,6 +13,10 @@ ServiceCenter::ServiceCenter(int* windows){
 ServiceCenter::~ServiceCenter(){
 }
 
+void ServiceCenter::setSize(){
+    students = customers->size();
+}
+
 //adds a new customer to hold on to until the time comes
 void ServiceCenter::addCustomer(Customer* c){
     customers->add(c);
@@ -26,14 +30,12 @@ void ServiceCenter::tickTime(){
 
     while(!customers->isEmpty() && customers->peek()->m_startTime == m_time){
         Customer* cust = customers->remove();
-        cout << cust->getOffice() << endl;
         if(cust->getOffice() == 'C'){
             cashier->addCustomer(cust, m_time);
         }else if(cust->getOffice() == 'F'){
             financialAid->addCustomer(cust, m_time);
         }else if(cust->getOffice() == 'R'){
             registrar->addCustomer(cust, m_time);
-            cout << "added to registrar" << endl;
         }
     }
     /*
@@ -45,6 +47,7 @@ void ServiceCenter::tickTime(){
     while(!cashQueue->isEmpty()){
         Customer* cust = cashQueue->remove();
         if(cust->getOffice() == NULL){
+            students--;
             delete cust;
         }
         if(cust->getOffice() == 'F'){
@@ -60,6 +63,7 @@ void ServiceCenter::tickTime(){
     while(!finQueue->isEmpty()){
         Customer* cust = finQueue->remove();
         if(cust->getOffice() == NULL){
+            students--;
             delete cust;
         }
         if(cust->getOffice() == 'C'){
@@ -75,6 +79,7 @@ void ServiceCenter::tickTime(){
     while(!regQueue->isEmpty()){
         Customer* cust = regQueue->remove();
         if(cust->getOffice() == NULL){
+            students--;
             delete cust;
         }
         if(cust->getOffice() == 'C'){
@@ -88,14 +93,16 @@ void ServiceCenter::tickTime(){
 
 //returns true if all students have been serviced
 bool ServiceCenter::finished(){
-    return m_time != 0 && (registrar->isEmpty() && cashier->isEmpty() && financialAid->isEmpty()) || m_time == 25;
-
-    //check if all offices and windows are empty
+    //return m_time != 0 && (registrar->isEmpty() && cashier->isEmpty() && financialAid->isEmpty()) || m_time == 25;
+    return (students == 0 && m_time != 0);
 }
 
 //prints the results
 void ServiceCenter::results(){
-    cout << "CASHIER RESULTS" << endl << cashier->results();
-    cout << "REGISTRAR RESULTS" << endl << registrar->results();
-    cout << "FINANCIAL AID RESULTS" << endl << financialAid->results();
+    cout << "CASHIER RESULTS" << endl;
+    cashier->results();
+    cout << "REGISTRAR RESULTS" << endl;
+    registrar->results();
+    cout << "FINANCIAL AID RESULTS" << endl;
+    financialAid->results();
 }

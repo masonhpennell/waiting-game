@@ -28,8 +28,10 @@ class ServiceCenter{
         void tickTime();
         bool finished();
         void results();
+        void setSize();
     private:
         ListQueue<Customer*>* customers;
+        int students;
         int m_time;
         Office* registrar;
         Office* cashier;

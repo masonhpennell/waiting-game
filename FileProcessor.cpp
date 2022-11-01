@@ -40,8 +40,6 @@ ServiceCenter* FileProcessor::readFile(string input){
                     tickLine += numStudents + 1;
                     studentLine += numStudents + 1;
                 }
-                i++;
-                cout << line << endl;
             }
             else{
                 // creates a new customer 
@@ -54,7 +52,6 @@ ServiceCenter* FileProcessor::readFile(string input){
                     // adds the first three integers to times array
                     if (j < 3){
                         times[j] = stoi(line.substr(0, pos));
-                        cout << times[j] << endl;
                         line.erase(0, pos + 1);
                     }
                     // adds the next two chars to offices array
@@ -76,10 +73,12 @@ ServiceCenter* FileProcessor::readFile(string input){
                     sc = new ServiceCenter(m_windows);
                 sc->addCustomer(c);
             }
+            i++;
         }else{
             break;
         }
     }
+    sc->setSize();
     inFile.close();
     return sc;
 }
