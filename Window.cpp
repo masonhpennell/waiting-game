@@ -14,6 +14,10 @@ Window::~Window(){
     }
 }
 
+Customer* Window::getCustomer(){
+    return m_servingCustomer;
+}
+
 // adds customer c to the window and resets the idle time
 void Window::addCustomer(Customer* c){
     m_servingCustomer = c;

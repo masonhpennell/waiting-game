@@ -24,6 +24,7 @@ class Window{
         void addCustomer(Customer* c);
         bool isIdle();
         void resetCustomer();
+        Customer* getCustomer();
     private:
         Customer* m_servingCustomer;
         int m_idleTime;
