@@ -23,7 +23,6 @@ WINDOW
 
   A window serves a customer and returns it when he/she is finished. It also keeps track of how long it's gone without serving a customer or how long it has left with a customer.
 
-
 FILE PROCESSOR
 
   This program reads the input file and creates a Service Center to hold all customers.
