@@ -1,6 +1,6 @@
 # Waiting Game
 Mason Pennell, Timothy Pieschala
-2370867 (Tim's ID)
+2370867 2391088
 pennell@chapman.edu, pieschala@chapman.edu
 CPSC 350-01
 Programming Assignment 4: The Waiting Game
