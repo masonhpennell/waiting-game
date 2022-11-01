@@ -28,16 +28,15 @@ ServiceCenter* FileProcessor::readFile(string input){
             if (line.length() < 3){
                 // first three lines are the number of windows in each office
                 if (i < 3){
-                    m_windows[i] = stod(line);
+                    m_windows[i] = stoi(line);
                 }
                 // checks if the current line is the clock tick
                 else if (i == tickLine){
-                    clockTick = stod(line);
+                    clockTick = stoi(line);
                 }
                 // checks if the current line is the number of students
                 else if (i == studentLine){
-                    numStudents = stod(line);
-                    // adds the number of students to account for the next line(s)
+                    numStudents = stoi(line);
                     tickLine += numStudents + 1;
                     studentLine += numStudents + 1;
                 }
@@ -55,6 +54,7 @@ ServiceCenter* FileProcessor::readFile(string input){
                     // adds the first three integers to times array
                     if (j < 3){
                         times[j] = stoi(line.substr(0, pos));
+                        cout << times[j] << endl;
                         line.erase(0, pos + 1);
                     }
                     // adds the next two chars to offices array
@@ -72,10 +72,12 @@ ServiceCenter* FileProcessor::readFile(string input){
                 for (int a = 0; a < 3; a++)
                     c->addTask(times[a], offices[a]);
                 // creates new service center if one doesn't exist
-                if (sc = NULL)
+                if (sc == NULL)
                     sc = new ServiceCenter(m_windows);
                 sc->addCustomer(c);
             }
+        }else{
+            break;
         }
     }
     inFile.close();

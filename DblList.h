@@ -157,7 +157,7 @@ T DblList<T>::remove(int pos){
     T data;
     if(pos == 0){
         data = removeFront();
-    }else if(pos >= m_size -1){
+    }else if(pos >= m_size - 1){
         data = removeBack();
     }else{
         ListNode<T>* current = m_front;

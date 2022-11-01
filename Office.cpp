@@ -2,13 +2,13 @@
 
 //constructor
 Office::Office(int windows){
-    Window** m_windowArr = new Window*[windows];
+    m_windowArr = new Window*[windows];
     m_numWindows = windows;
     for(int i = 0; i < m_numWindows; i++){
         m_windowArr[i] = new Window();
     }
 
-    ListQueue<Customer*>* m_customerQueue = new ListQueue<Customer*>;
+    m_customerQueue = new ListQueue<Customer*>;
     int m_overtenWaited = 0;
     int m_fiveIdle = 0;
 }
@@ -28,10 +28,18 @@ void Office::addCustomer(Customer* cust, int time){
 
 //moves the time forward by one
 ListQueue<Customer*>* Office::tickTime(int time){
-
+    cout << "office tick" << endl;
     ListQueue<Customer*>* tempQueue = new ListQueue<Customer*>(); //Using ListQueue as a way to return multiple items (if more than one customer finishes at windows at a time) like a ghetto ArrayList or something
     for(int i = 0; i < m_numWindows; i++){
         // temp: the customer currently at window [i]
+        cout << "   window tick" << endl;
+        cout << "   customer @ " << m_windowArr[i] << endl;
+        if(m_windowArr[i]->isIdle()){
+            if(!m_customerQueue->isEmpty()){
+                m_windowArr[i]->addCustomer(m_customerQueue->remove());
+                cout << "      moving customer to window in office" << endl;
+            }
+        }
         Customer* temp = m_windowArr[i]->tickTime();
         // if no customer is returned, the window is still busy so nothing happens
         // if a customer IS returned, the next person in line is added
@@ -68,6 +76,7 @@ bool Office::isEmpty(){
     for(int i = 0; i < m_numWindows; i++){
         if(m_windowArr[i] != NULL){
             empty = false;
+
         }
     }
     if(!m_customerQueue->isEmpty()){
