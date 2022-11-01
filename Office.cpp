@@ -7,7 +7,7 @@ Office::Office(int windows){
     for(int i = 0; i < m_numWindows; i++){
         m_windowArr[i] = new Window();
     }
-
+    m_numStudents = 0;
     m_customerQueue = new ListQueue<Customer*>;
     m_tenWaited = 0;
     m_fiveIdle = 0;
@@ -52,7 +52,6 @@ ListQueue<Customer*>* Office::tickTime(int time){
             if(time - temp->getEnterTime() > m_longestWait){
                 m_longestWait = time - temp->getEnterTime();
             }
-            //resets the customer 
             //m_windowArr[i]->resetCustomer();
         }else if(m_windowArr[i]->isIdle()){
             // increments m_fiveIdle if the window was idle for over 5 minutes
@@ -69,21 +68,6 @@ ListQueue<Customer*>* Office::tickTime(int time){
     return tempQueue;
 }
 
-//returns true if every window in the office is empty
-bool Office::isEmpty(){
-    bool empty = true;
-    for(int i = 0; i < m_numWindows; i++){
-        if(m_windowArr[i] != NULL){
-            empty = false;
-
-        }
-    }
-    if(!m_customerQueue->isEmpty()){
-        empty = false;
-    }
-    return empty;
-}
-
 //prints the results
 void Office::results(){
     string s = "";
@@ -93,5 +77,5 @@ void Office::results(){
     s += "Average window idle time: " + to_string(m_averageIdle/m_numWindows) + "\n";
     s += "Longest window idle time: " + to_string(m_longestIdle) + "\n";
     s += "Windows that were idle for over 5 minutes: " + to_string(m_fiveIdle) + "\n";
-    cout << s;
+    cout << s << endl;
 }

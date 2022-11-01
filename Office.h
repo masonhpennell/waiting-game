@@ -31,6 +31,7 @@ class Office{
         void results();
         bool isEmpty();
     private:
+        int m_numStudents;
         int m_numWindows;
         ListQueue<Customer*>* m_customerQueue;
         int m_tenWaited;

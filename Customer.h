@@ -29,7 +29,6 @@ class Customer{
     private:
         ListQueue<int>* m_todoQueueTime;
         ListQueue<char>* m_todoQueueOffice;
-        
 };
 
 #endif

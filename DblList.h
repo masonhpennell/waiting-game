@@ -26,7 +26,6 @@ class DblList{
         T removeFront();
         T removeBack();
         T remove(int pos);
-
     private:
         ListNode<T>* m_front;
         ListNode<T>* m_back;

@@ -22,10 +22,8 @@ class ListQueue{
         T peek();
         bool isEmpty();
         int size();
-
     private:
         DblList<T>* m_list;
-
 };
 
 template<typename T>
