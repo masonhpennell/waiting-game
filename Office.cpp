@@ -28,6 +28,7 @@ Office::~Office(){
 void Office::addCustomer(Customer* cust, int time){
     cust->m_enterTime = time;
     m_customerQueue->add(cust);
+    m_numStudents++;
 }
 
 //moves the time forward by one
@@ -45,17 +46,18 @@ ListQueue<Customer*>* Office::tickTime(int time){
         if(temp != NULL){
             tempQueue->add(temp);
             // increments m_tenWaited if the student waited more than 10 minutes to get a window
-            if(time - temp->getEnterTime() == 10){
+            if(time - temp->getTime() == 10){
                 m_tenWaited++;
             }
             // changes m_longestWait to the longest time a student waited
-            if(time - temp->getEnterTime() > m_longestWait){
+            if(time - temp->getTime() > m_longestWait){
                 m_longestWait = time - temp->getEnterTime();
             }
             //m_windowArr[i]->resetCustomer();
         }else if(m_windowArr[i]->isIdle()){
+            m_averageIdle += m_windowArr[i]->getIdleTime();
             // increments m_fiveIdle if the window was idle for over 5 minutes
-            if(m_windowArr[i]->getIdleTime() == 5){
+            if(m_windowArr[i]->getIdleTime() == 5 && m_fiveIdle < m_numWindows){
                 m_fiveIdle++;
             }
             // the longest time a window had no customer
@@ -63,7 +65,6 @@ ListQueue<Customer*>* Office::tickTime(int time){
                 m_longestIdle = m_windowArr[i]->getIdleTime();
             }
         }
-
     }
     return tempQueue;
 }
@@ -71,7 +72,7 @@ ListQueue<Customer*>* Office::tickTime(int time){
 //prints the results
 void Office::results(){
     string s = "";
-    s += "Average student wait time: " + to_string(m_averageWait) + "\n";
+    s += "Average student wait time: " + to_string(m_averageWait/m_numStudents) + "\n";
     s += "Longest student wait time: " + to_string(m_longestWait) + "\n";
     s += "Students that waited over 10 minutes: " + to_string(m_tenWaited) + "\n";
     s += "Average window idle time: " + to_string(m_averageIdle/m_numWindows) + "\n";

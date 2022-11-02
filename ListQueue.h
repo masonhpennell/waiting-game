@@ -9,7 +9,6 @@ This type of queue has a FIFO data structure and uses the linked list methods
 */
 #ifndef ListQueue_H
 #define ListQueue_H
-#include <iostream>
 #include "DblList.h"
 
 template<typename T>
