@@ -53,9 +53,12 @@ ListQueue<Customer*>* Office::tickTime(int time){
             if(time - temp->getTime() > m_longestWait){
                 m_longestWait = time - temp->getEnterTime();
             }
+            if(!m_customerQueue->isEmpty()){
+                m_averageWait += m_customerQueue->size();
+            }
             //m_windowArr[i]->resetCustomer();
         }else if(m_windowArr[i]->isIdle()){
-            m_averageIdle += m_windowArr[i]->getIdleTime();
+            m_averageIdle++;
             // increments m_fiveIdle if the window was idle for over 5 minutes
             if(m_windowArr[i]->getIdleTime() == 5 && m_fiveIdle < m_numWindows){
                 m_fiveIdle++;

@@ -29,5 +29,5 @@ FILE PROCESSOR
 
 INSTRUCTIONS
 
-1. Compile by typing "g++ -o test *.cpp".
-2. Run code with "./test input.txt".
+1. Compile by typing "g++ -o main -w *.cpp" -- the -w flag is used to ignore compiler warnings about NULL comparisons
+2. Run code with "./main input.txt"
