@@ -37,8 +37,13 @@ ListQueue<Customer*>* Office::tickTime(int time){
     for(int i = 0; i < m_numWindows; i++){
         // temp: the customer currently at window [i]
         if(m_windowArr[i]->isIdle()){
-            if(!(m_customerQueue->isEmpty()))
+            if(!(m_customerQueue->isEmpty())){
                 m_windowArr[i]->addCustomer(m_customerQueue->remove());
+                if(time -  m_windowArr[i]->getCustomer()->m_enterTime > m_longestWait){
+                    m_longestWait = time -  m_windowArr[i]->getCustomer()->m_enterTime;
+                }
+                m_windowArr[i]->getCustomer()->m_enterTime = 0;
+            }
         }
         Customer* temp = m_windowArr[i]->tickTime();
         // if no customer is returned, the window is still busy so nothing happens
@@ -50,9 +55,7 @@ ListQueue<Customer*>* Office::tickTime(int time){
                 m_tenWaited++;
             }
             // changes m_longestWait to the longest time a student waited
-            if(time - temp->getTime() > m_longestWait){
-                m_longestWait = time - temp->getEnterTime();
-            }
+
             if(!m_customerQueue->isEmpty()){
                 m_averageWait += m_customerQueue->size();
             }

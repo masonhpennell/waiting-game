@@ -100,8 +100,8 @@ bool ServiceCenter::finished(){
 void ServiceCenter::results(){
     cout << "CASHIER RESULTS" << endl;
     cashier->results();
-    cout << "REGISTRAR RESULTS" << endl;
-    registrar->results();
     cout << "FINANCIAL AID RESULTS" << endl;
     financialAid->results();
+    cout << "REGISTRAR RESULTS" << endl;
+    registrar->results();
 }
